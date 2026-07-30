@@ -4,10 +4,6 @@ A full-stack MERN society management platform with JWT auth, role-based access
 (Admin / Member / Security Guard), and 4 practical AI features powered by the
 Gemini API.
 
-This is built to be **interview-ready**: clean MVC on the backend, a simple
-Context + service-layer pattern on the frontend, and nothing exotic. Every
-piece should be something you can explain in under 2 minutes.
-
 ---
 
 ## 1. Tech stack
@@ -49,7 +45,7 @@ npm install
 npm run dev                # nodemon on http://localhost:5000
 ```
 
-You need:
+
 - A MongoDB connection string (local `mongodb://127.0.0.1:27017/smart-society` or Atlas)
 - A free [Cloudinary](https://cloudinary.com) account (for complaint photos + profile images)
 - A [Gemini API key](https://ai.google.dev) (free tier is enough for all 4 AI features)
@@ -75,7 +71,7 @@ path: register a normal account, then manually flip its `role` field to
 db.users.updateOne({ email: "you@example.com" }, { $set: { role: "admin" } })
 ```
 
-## 4. How auth + roles work (for interviews)
+## 4. How auth + roles work 
 
 - Register/Login return a JWT signed with the user's `_id`, stored in
   `localStorage` on the client.
@@ -111,9 +107,3 @@ Maintenance, Notice Board (with AI), Visitors (invite → approve/reject → gua
 entry/exit), Profile (with photo upload), and Settings (Chatbot + Meeting
 Summary).
 
-Good next steps if you want to keep building for your portfolio:
-- Add pagination/search to the Residents and Complaints tables
-- Add a real visitor-pass QR code (e.g. `qrcode` npm package) generated on invite
-- Add unit tests (Jest + Supertest for the API is a common, easy-to-explain choice)
-- Swap `localStorage` JWT storage for an httpOnly cookie if you want to talk
-  about XSS/CSRF tradeoffs in interviews
