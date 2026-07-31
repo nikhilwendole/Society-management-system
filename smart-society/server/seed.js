@@ -148,6 +148,34 @@ const run = async () => {
     },
   ]);
 
+
+
+  console.log("Creating visitor records...");
+  await Visitor.create([
+    {
+      visitorName: "Amazon Delivery",
+      visitorType: "Delivery",
+      mobile: "9900011122",
+      flat: flatA101._id,
+      resident: member1._id,
+      purpose: "Package delivery",
+      status: "Approved",
+      approvedBy: member1._id,
+      approvedAt: new Date(),
+      createdBySecurity: guard._id,
+    },
+    {
+      visitorName: "Rohan (Friend)",
+      visitorType: "Friend",
+      mobile: "9900033344",
+      flat: flatB204._id,
+      resident: member2._id,
+      purpose: "Personal visit",
+      status: "Pending",
+      createdBySecurity: guard._id,
+    },
+  ]);
+
   console.log("Creating visitor records...");
   await Visitor.create([
     {

@@ -48,15 +48,33 @@ const getComplaints = async (req, res, next) => {
 // @desc    Get single complaint
 // @route   GET /api/complaints/:id
 // @access  Private
+// const getComplaintById = async (req, res, next) => {
+//   try {
+//     const complaint = await Complaint.findById(req.params.id).populate("createdBy", "name email");
+//     if (!complaint) return res.status(404).json({ success: false, message: "Complaint not found" });
+//     res.status(200).json({ success: true, complaint });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+
 const getComplaintById = async (req, res, next) => {
   try {
     const complaint = await Complaint.findById(req.params.id).populate("createdBy", "name email");
     if (!complaint) return res.status(404).json({ success: false, message: "Complaint not found" });
+
+    if (req.user.role === "member" && complaint.createdBy._id.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ success: false, message: "Not authorized to view this complaint" });
+    }
+
     res.status(200).json({ success: true, complaint });
   } catch (error) {
     next(error);
   }
 };
+
+
 
 // @desc    Update complaint status (admin)
 // @route   PUT /api/complaints/:id/status
